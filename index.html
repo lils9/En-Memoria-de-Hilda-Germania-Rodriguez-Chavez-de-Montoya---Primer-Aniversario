@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>En Memoria de Hilda Germania Rodriguez Chavez de Montoya - Primer Aniversario</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Encabezado */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            font-style: italic;
+            margin: 5px 0;
+        }
+        
+        /* Sección principal */
+        .main-content {
+            background-color: white;
+            padding: 40px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Secciones de recuerdos */
+        .memories-section {
+            margin-top: 50px;
+        }
+        
+        .photo-memories, .written-memories {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #f8b500;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .section-subtitle {
+            font-style: italic;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 25px;
+            font-size: 1.1em;
+        }
+        
+        /* Galería de fotos */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Sección de recuerdos escritos */
+        .memory-item {
+            display: flex;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
+            align-items: flex-start;
+        }
+        
+        .memory-icon {
+            font-size: 28px;
+            margin-right: 20px;
+            margin-top: 5px;
+            flex-shrink: 0;
+            color: #e25822;
+        }
+        
+        .memory-text {
+            flex-grow: 1;
+        }
+        
+        .memory-text h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.3em;
+        }
+        
+        .memory-text p {
+            margin: 0;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* Modal para imagen completa */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+        
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+        
+        .close:hover {
+            color: #fff;
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        /* Pie de página */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        footer p {
+            margin: 5px 0;
+        }
+        
+        /* Efectos especiales - Velas */
+        .candle-container {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        
+        .candle {
+            position: relative;
+            width: 40px;
+            height: 80px;
+            margin: 0 60px;
+        }
+        
+        .candle-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #e25822, #f8b500);
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .candle-flame {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 40px;
+            background: #ffef00;
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 
+                0 0 15px 8px rgba(255, 200, 0, 0.7),
+                0 0 30px 15px rgba(255, 100, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            filter: blur(1px);
+        }
+        
+        body.scrolled .candle-flame {
+            opacity: 1;
+            animation: flicker 1.8s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1) rotate(0deg);
+                box-shadow: 
+                    0 0 15px 8px rgba(255, 200, 0, 0.7),
+                    0 0 30px 15px rgba(255, 100, 0, 0.5);
+            }
+            25% { 
+                transform: translateX(-50%) scale(1.05) rotate(3deg);
+                box-shadow: 
+                    0 0 18px 10px rgba(255, 200, 0, 0.8),
+                    0 0 35px 18px rgba(255, 100, 0, 0.6);
+            }
+            50% { 
+                transform: translateX(-50%) scale(0.95) rotate(-3deg);
+                box-shadow: 
+                    0 0 12px 6px rgba(255, 200, 0, 0.6),
+                    0 0 25px 12px rgba(255, 100, 0, 0.4);
+            }
+            75% { 
+                transform: translateX(-50%) scale(1.03) rotate(2deg);
+                box-shadow: 
+                    0 0 16px 9px rgba(255, 200, 0, 0.75),
+                    0 0 32px 16px rgba(255, 100, 0, 0.55);
+            }
+        }
+        
+        /* Mensaje destacado */
+        .highlight-message {
+            text-align: center;
+            font-style: italic;
+            margin: 40px auto;
+            padding: 20px;
+            max-width: 800px;
+            font-size: 1.2em;
+            color: #2c3e50;
+            border-top: 1px solid #f8b500;
+            border-bottom: 1px solid #f8b500;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .main-content {
+                padding: 25px;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+            
+            .gallery-item {
+                height: 180px;
+            }
+            
+            .candle {
+                margin: 0 30px;
+                width: 25px;
+                height: 50px;
+            }
+            
+            .candle-flame {
+                top: -15px;
+                width: 12px;
+                height: 25px;
+            }
+            
+            .modal-img {
+                max-width: 95%;
+                max-height: 80%;
+            }
+            
+            .close {
+                top: 15px;
+                right: 20px;
+                font-size: 30px;
+            }
+            
+            .memory-item {
+                flex-direction: column;
+            }
+            
+            .memory-icon {
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .candle {
+                margin: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="candle-container">
+            <div class="candle">
+                <div class="candle-body"></div>
+                <div class="candle-flame"></div>
+            </div>
+            <div class="candle">
+                <div class="candle-body"></div>
+                <div class="candle-flame"></div>
+            </div>
+        </div>
+        <div class="header-content">
+            <h1>Hilda Germania Rodriguez Chavez de Montoya</h1>
+            <p>1920 - 2024</p>
+            <p>En nuestro corazón por siempre</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <h2>Primer Aniversario de tu Partida</h2>
+            <p>Hoy se cumple un año desde que partiste, pero tu amor, tus enseñanzas y tu presencia siguen vivos en cada uno de nosotros.</p>
+            
+            <p>Eres mucho más que una abuela, fuiste madre, guía y ejemplo de vida para toda nuestra familia. Cada día extrañamos tu sonrisa, tus consejos y ese amor incondicional que solo tú sabías dar.</p>
+            
+            <div class="memories-section">
+                <div class="photo-memories">
+                    <h3 class="section-title">Recuerdos Fotográficos</h3>
+                    <p class="section-subtitle">Momentos capturados que atesoramos en nuestra memoria</p>
+                    
+                    <div class="gallery">
+                        <div class="gallery-item" onclick="openModal('img/Imagen de WhatsApp 2025-07-02 a las 22.22.05_61431d4e.jpg')">
+                            <img src="img/Imagen de WhatsApp 2025-07-02 a las 22.22.05_61431d4e.jpg" alt="Recuerdo de Hilda">
+                        </div>
+                        <div class="gallery-item" onclick="openModal('img/Imagen de WhatsApp 2025-07-02 a las 22.22.15_c46deb34.jpg')">
+                            <img src="img/Imagen de WhatsApp 2025-07-02 a las 22.22.15_c46deb34.jpg" alt="Recuerdo de Hilda">
+                        </div>
+                        <div class="gallery-item" onclick="openModal('https://via.placeholder.com/600x400?text=Hilda+y+su+familia')">
+                            <img src="https://via.placeholder.com/600x400?text=Hilda+y+su+familia" alt="Recuerdo de Hilda">
+                        </div>
+                        <div class="gallery-item" onclick="openModal('https://via.placeholder.com/600x400?text=Hilda+sonriendo')">
+                            <img src="https://via.placeholder.com/600x400?text=Hilda+sonriendo" alt="Recuerdo de Hilda">
+                        </div>
+                        <div class="gallery-item" onclick="openModal('https://via.placeholder.com/600x400?text=Hilda+en+reunión+familiar')">
+                            <img src="https://via.placeholder.com/600x400?text=Hilda+en+reunión+familiar" alt="Recuerdo de Hilda">
+                        </div>
+                        <div class="gallery-item" onclick="openModal('https://via.placeholder.com/600x400?text=Hilda+y+sus+nietos')">
+                            <img src="https://via.placeholder.com/600x400?text=Hilda+y+sus+nietos" alt="Recuerdo de Hilda">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="written-memories">
+                    <h3 class="section-title">Nuestros Recuerdos</h3>
+                    <p class="section-subtitle">Historias y anécdotas que guardamos en el corazón</p>
+                    
+                    <div class="memory-item">
+                        <div class="memory-icon">❤️</div>
+                        <div class="memory-text">
+                            <h4>Tu amor incondicional</h4>
+                            <p>Recuerdo cómo siempre tenías una palabra de aliento para cada uno de nosotros, sin importar las circunstancias. Tu casa era nuestro refugio y tu corazón, nuestro hogar. No había problema que no pudieras hacer más llevadero con tu sabiduría y cariño.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-item">
+                        <div class="memory-icon">📚</div>
+                        <div class="memory-text">
+                            <h4>Tus enseñanzas</h4>
+                            <p>Las lecciones que nos dejaste van más allá de lo material. Nos enseñaste el valor de la familia, la importancia de la honestidad y la belleza de la sencillez. Cada consejo que nos diste sigue guiando nuestros pasos cada día.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="memory-item">
+                        <div class="memory-icon">🍲</div>
+                        <div class="memory-text">
+                            <h4>Tus tradiciones</h4>
+                            <p>Especialmente recuerdo cómo preparabas esas deliciosas empanadas los domingos, que reunían a toda la familia alrededor de la mesa. Hoy seguimos practicando tus recetas para mantener viva tu memoria. Cada aroma, cada sabor, nos trae de vuelta a tu lado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-message">
+                "Los que amamos nunca perdemos del todo a quienes amamos,<br>
+                porque siempre los llevamos en nuestro corazón."<br>
+                - Hilda Rodriguez Chavez 
+            </div>
+            
+            <h3>Mensaje en este día especial</h3>
+            <p>Abuela, aunque físicamente no estés, sabemos que nos acompañas en cada paso, en cada logro, en cada momento difícil. Hoy, en este primer aniversario de tu partida, queremos recordarte con amor y gratitud por todo lo que fuiste y sigues siendo para nosotros.</p>
+            
+            <p>Te extrañamos cada día, pero encontramos consuelo sabiendo que ahora eres nuestro ángel guardián. Descansa en paz, querida madre-abuela.</p>
+        </div>
+    </div>
+    
+    <!-- Modal para imagen completa -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="expandedImg" class="modal-img">
+        </div>
+    </div>
+    
+    <footer>
+        <p>Esta página fue creada con amor por la familia, en memoria de Hilda Rodriguez Chavez de Montoya</p>
+        <p>Primer aniversario - 2025</p>
+    </footer>
+
+    <script>
+        // JavaScript para activar las velas al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    document.body.classList.add('scrolled');
+                } else {
+                    document.body.classList.remove('scrolled');
+                }
+            });
+            
+            // Activar velas después de 1 segundo aunque no se haga scroll
+            setTimeout(function() {
+                document.body.classList.add('scrolled');
+            }, 1000);
+        });
+        
+        // Funciones para el modal de imágenes
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('expandedImg');
+            
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+            
+            // Deshabilitar scroll del body cuando el modal está abierto
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = "none";
+            // Habilitar scroll del body cuando el modal se cierra
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Cerrar modal al hacer clic fuera de la imagen
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Cerrar modal con tecla ESC
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+            if (evt.key === "Escape") {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
